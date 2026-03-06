@@ -2,14 +2,14 @@ package it.vismaragiaffreda.crud_primefaces.jsf;
 
 import it.vismaragiaffreda.crud_primefaces.entity.Corso;
 import it.vismaragiaffreda.crud_primefaces.service.CorsoService;
+import org.springframework.context.annotation.Scope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 import java.io.Serializable;
 import java.util.List;
 
 @Component
-@RequestScope
+@Scope("view")
 public class CorsoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,7 +46,6 @@ public class CorsoBean implements Serializable {
         corsoService.deleteCorso(id);
         loadCorsi();
     }
-
 
     public void newCorso() {
         this.corsoSelezionato = new Corso();

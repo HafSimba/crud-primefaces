@@ -10,6 +10,44 @@ Obiettivo: tracciare in modo chiaro cosa e stato inserito/modificato nei file.
 
 ## Storico
 
+### 2026-03-06 - Hotfix Avvio Runtime (Porta e Mapping JSF)
+File modificati:
+- `src/main/resources/application.properties`
+
+Modifica effettuata:
+- Corretto mapping FacesServlet da `*.xhtml,/` a `*.xhtml` per evitare intercettazione di endpoint tecnici come `/error`.
+
+Esito verifica:
+- Applicazione avviata con `./mvnw.cmd spring-boot:run`.
+- Verifica HTTP OK su `http://localhost:8080/index.xhtml` (status `200`).
+
+### 2026-03-06 - Refactor Architettura JSF Pura + Bean View Scope
+File modificati:
+- `src/main/resources/application.properties`
+- `src/main/java/it/vismaragiaffreda/crud_primefaces/jsf/StudenteBean.java`
+- `src/main/java/it/vismaragiaffreda/crud_primefaces/jsf/CorsoBean.java`
+- `src/main/java/it/vismaragiaffreda/crud_primefaces/jsf/ProvaBean.java`
+- `src/main/java/it/vismaragiaffreda/crud_primefaces/jsf/StatiStudentiBean.java`
+- `src/main/java/it/vismaragiaffreda/crud_primefaces/controller/HomeController.java` (rimosso)
+- `src/main/resources/templates/index.xhtml` (rimosso)
+- `src/main/resources/templates/studenti/lista.xhtml` (rimosso)
+- `src/main/resources/templates/studenti/inserisci.xhtml` (rimosso)
+- `src/main/resources/templates/studenti/stato.xhtml` (rimosso)
+- `src/main/resources/templates/corsi/lista.xhtml` (rimosso)
+- `src/main/resources/templates/corsi/inserisci.xhtml` (rimosso)
+- `src/main/resources/templates/prove/registrazione.xhtml` (rimosso)
+
+Modifiche effettuate:
+- Eliminata architettura mista MVC/JSF, mantenendo solo frontend JSF sotto `META-INF/resources`.
+- Rimossi property MVC (`spring.mvc.view.*`, `spring.mvc.pathmatch.*`, `spring.mvc.welcome-page-location`).
+- Aggiunta configurazione JoinFaces per mapping servlet JSF su root e `.xhtml`:
+  - `joinfaces.faces-servlet.url-mappings=*.xhtml,/`
+- Refactor scope bean JSF da `@RequestScope` a `@Scope("view")` per UI stateful.
+
+Risultato:
+- Architettura coerente con approccio JSF puro.
+- Stato UI mantenuto meglio durante interazioni sulla stessa view (datatable/form PrimeFaces).
+
 ### 2026-03-06 - Fase 9 - Refinement UI e Styling Finale
 File modificati:
 - `src/main/resources/META-INF/resources/index.xhtml`

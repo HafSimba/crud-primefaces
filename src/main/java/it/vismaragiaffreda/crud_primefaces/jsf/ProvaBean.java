@@ -6,16 +6,16 @@ import it.vismaragiaffreda.crud_primefaces.entity.Corso;
 import it.vismaragiaffreda.crud_primefaces.service.ProvaService;
 import it.vismaragiaffreda.crud_primefaces.service.StudenteService;
 import it.vismaragiaffreda.crud_primefaces.service.CorsoService;
+import org.springframework.context.annotation.Scope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Component
-@RequestScope
+@Scope("view")
 public class ProvaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -110,7 +110,6 @@ public class ProvaBean implements Serializable {
         loadProve();
     }
 
-  
     public void newProva() {
         this.provaSelezionata = new Prova();
         this.studenteIdSelezionato = null;

@@ -2,14 +2,14 @@ package it.vismaragiaffreda.crud_primefaces.jsf;
 
 import it.vismaragiaffreda.crud_primefaces.entity.Studente;
 import it.vismaragiaffreda.crud_primefaces.service.StudenteService;
+import org.springframework.context.annotation.Scope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 import java.io.Serializable;
 import java.util.List;
 
 @Component
-@RequestScope
+@Scope("view")
 public class StudenteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +49,6 @@ public class StudenteBean implements Serializable {
         studenteService.deleteStudente(id);
         loadStudenti();
     }
-
 
     public void newStudente() {
         this.studenteSelezionato = new Studente();
