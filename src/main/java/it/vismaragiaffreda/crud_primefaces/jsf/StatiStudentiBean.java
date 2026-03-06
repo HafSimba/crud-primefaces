@@ -9,13 +9,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Managed Bean JSF per la visualizzazione dello stato degli studenti.
- * Mostra per ogni studente:
- * - Media voti (solo prove superate, voto >= 18)
- * - Lista di moduli ancora da superare
- * - Numero di corsi superati/falliti
- */
+// Stato studenti 
 @Component
 @RequestScope
 public class StatiStudentiBean implements Serializable {
@@ -28,11 +22,8 @@ public class StatiStudentiBean implements Serializable {
     private List<Studente> studenti;
     private Studente studenteSelezionato;
 
-    // ===== INNER CLASS FOR DISPLAY =====
 
-    /**
-     * Classe wrapper per visualizzare le informazioni aggregate di uno studente
-     */
+    // Info di stato per ciascuno studente
     public class StatoStudente {
         private Studente studente;
         private Double mediaVoti;
@@ -87,20 +78,15 @@ public class StatiStudentiBean implements Serializable {
         }
     }
 
-    // ===== LOAD DATA =====
+    // Load Data
 
-    /**
-     * Carica la lista di tutti gli studenti e calcola il stato per ciascuno
-     */
+     // Stato studienti
     public void loadStudenti() {
         this.studenti = studenteService.getAllStudenti();
     }
 
-    // ===== RESULT GENERATION =====
 
-    /**
-     * Genera la lista di StatoStudente per la visualizzazione
-     */
+
     public List<StatoStudente> getStatiStudenti() {
         List<Studente> lista = getStudenti();
         return lista.stream()
@@ -115,9 +101,7 @@ public class StatiStudentiBean implements Serializable {
                 .toList(); // Java 16+
     }
 
-    /**
-     * Ottiene il dettaglio dello stato di uno studente specifico
-     */
+    // Dettaglio stato studente
     public StatoStudente getStatoStudente(Studente studente) {
         return new StatoStudente(
                 studente,
@@ -129,16 +113,13 @@ public class StatiStudentiBean implements Serializable {
         );
     }
 
-    // ===== SELECTION =====
+    // Seleziona uno studente per visualizzare il dettaglio
 
-    /**
-     * Seleziona uno studente per visualizzare il dettaglio
-     */
     public void selectStudente(Studente studente) {
         this.studenteSelezionato = studente;
     }
 
-    // ===== GETTERS AND SETTERS =====
+    // Getters and Setters
 
     public List<Studente> getStudenti() {
         if (studenti == null) {

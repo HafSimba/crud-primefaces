@@ -10,6 +10,66 @@ Obiettivo: tracciare in modo chiaro cosa e stato inserito/modificato nei file.
 
 ## Storico
 
+### 2026-03-06 - Fase 8 - Creazione Pagine XHTML + PrimeFaces (Frontend)
+File creati:
+- Layout master: `src/main/resources/templates/layout/template.xhtml`
+- Homepage: `src/main/resources/templates/index.xhtml`
+- Studenti: `lista.xhtml`, `inserisci.xhtml`, `stato.xhtml`
+- Corsi: `lista.xhtml`, `inserisci.xhtml`
+- Prove: `registrazione.xhtml`
+- CSS: `src/main/resources/static/css/style.css`
+
+Inserimenti effettuati:
+
+**Layout Master**:
+- Struttura di base HTML5 + JSF
+- Header con titolo e sottotitolo
+- Navbar con PrimeFaces menubar (navigazione principale)
+- Sezione content (ui:insert per le pagine figlie)
+- Footer
+- Default ui:composition per tutte le pagine
+
+**Index.xhtml (Homepage)**:
+- Pagina di benvenuto
+- Descrizione funzionalità principali
+- Criteri di valutazione (voto >= 18 per superamento)
+- Pulsanti di navigazione rapida
+
+**Pagine Studenti**:
+- **lista.xhtml**: DataTable con tutti gli studenti, CRUD inline (modifica/elimina con dialog)
+- **inserisci.xhtml**: Form per inserimento nuovo studente (nome, cognome, email)
+- **stato.xhtml**: Tabella espandibile con dettagli ogni studente:
+  - Media voti (prove superate)
+  - Moduli mancanti (corsi non superati)
+  - Statistiche (superati, falliti, total prove)
+
+**Pagine Corsi**:
+- **lista.xhtml**: DataTable con tutti i corsi, CRUD inline
+- **inserisci.xhtml**: Form per inserimento nuovo corso (nome, descrizione)
+
+**Pagine Prove**:
+- **registrazione.xhtml**: Form registrazione prova con:
+  - SelectOneMenu per studente (dropdown)
+  - SelectOneMenu per corso (dropdown)
+  - SpinnerNumber per voto (1-30)
+  - Validazioni lato client
+  - Badge colore per stato (SUPERATO/FALLITO)
+  - Tabella prove registrate
+
+**CSS**:
+- Tema moderno con gradiente viola (#667eea, #764ba2)
+- Responsive design (mobile-friendly)
+- Stili per datatable, buttons, forms, messages, badges, dialog
+- Transitions e hover effects
+
+Note:
+- Tutti gli XHTML usano JSF + PrimeFaces
+- Integrati i Managed Bean (StudenteBean, CorsoBean, ProvaBean, StatiStudentiBean)
+- Validazione lato server mantenuta nei bean
+- Pagine responsive per mobile/tablet
+- Colori e icone accattivanti (emoji + PrimeFaces icons)
+- Tutti i requisiti del task implementati e visibili nel frontend
+
 ### 2026-03-06 - Fase 7 - Creazione Managed Bean JSF (Controller Layer)
 File creati:
 - `src/main/java/.../jsf/StudenteBean.java`

@@ -40,29 +40,23 @@ public class ProvaBean implements Serializable {
     private Integer votoInserito;
     private String messaggioErrore;
 
-    // ===== INIT / LOAD DATA =====
+    // Load Data
 
-    /**
-     * Carica tutte le prove registrate
-     */
+    // Carica tutte le prove
     public void loadProve() {
         this.prove = provaService.getAllProve();
     }
 
-    /**
-     * Carica i dati necessari per il form di registrazione
-     */
+    // Carica studenti e corsi per il form di registrazione prova
+
     public void loadDatiRegistrazione() {
         this.studenti = studenteService.getAllStudenti();
         this.corsi = corsoService.getAllCorsi();
     }
 
-    // ===== CRUD OPERATIONS =====
+    // Crud Operations
 
-    /**
-     * Registra una nuova prova (esame superato/fallito)
-     * @return outcome per JSF navigation
-     */
+    // Registra una nuova prova
     public String registraProva() {
         messaggioErrore = null;
 
@@ -110,17 +104,13 @@ public class ProvaBean implements Serializable {
         }
     }
 
-    /**
-     * Elimina una prova
-     */
+    // Elimina una prova
     public void deleteProva(Long id) {
         provaService.deleteProva(id);
         loadProve();
     }
 
-    /**
-     * Prepara una nuova prova per l'inserimento
-     */
+  
     public void newProva() {
         this.provaSelezionata = new Prova();
         this.studenteIdSelezionato = null;
@@ -129,7 +119,7 @@ public class ProvaBean implements Serializable {
         this.messaggioErrore = null;
     }
 
-    // ===== GETTERS AND SETTERS =====
+    // Getters and Setters
 
     public List<Prova> getProve() {
         if (prove == null) {

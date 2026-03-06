@@ -9,23 +9,15 @@ import java.util.Optional;
 @Repository
 public interface StudenteRepository extends JpaRepository<Studente, Long> {
 
-    /**
-     * Cerca uno studente per nome
-     */
+    // Cerca uno studente per nome
     List<Studente> findByNome(String nome);
 
-    /**
-     * Cerca uno studente per cognome
-     */
+    // Cerca uno studente per cognome
     List<Studente> findByCognome(String cognome);
 
-    /**
-     * Cerca uno studente per email
-     */
+    // Cerca uno studente per nome e cognome
     Optional<Studente> findByEmail(String email);
 
-    /**
-     * Cerca uno studente per nome e cognome
-     */
+    // Cerca uno studente per nome e cognome
     Optional<Studente> findByNomeAndCognome(String nome, String cognome);
 }

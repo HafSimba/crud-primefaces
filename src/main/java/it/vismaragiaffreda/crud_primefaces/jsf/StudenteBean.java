@@ -20,21 +20,16 @@ public class StudenteBean implements Serializable {
     private List<Studente> studenti;
     private Studente studenteSelezionato = new Studente();
 
-    // ===== LOAD DATA =====
+    // Load Data
 
-    /**
-     * Carica la lista di tutti gli studenti
-     */
+    // Carica la lista di tutti gli studenti
     public void loadStudenti() {
         this.studenti = studenteService.getAllStudenti();
     }
 
-    // ===== CRUD OPERATIONS =====
+    // Crud Operations
 
-    /**
-     * Salva uno studente nuovo
-     * @return outcome per JSF navigation
-     */
+    // Salva uno studente nuovo o aggiornato
     public String saveStudente() {
         if (studenteSelezionato.getNome() == null || studenteSelezionato.getNome().isEmpty()) {
             return "error_nome_vuoto";
@@ -49,29 +44,23 @@ public class StudenteBean implements Serializable {
         return "success";
     }
 
-    /**
-     * Elimina uno studente
-     */
+    // Elimina uno studente
     public void deleteStudente(Long id) {
         studenteService.deleteStudente(id);
         loadStudenti();
     }
 
-    /**
-     * Prepara un nuovo studente per l'inserimento
-     */
+
     public void newStudente() {
         this.studenteSelezionato = new Studente();
     }
 
-    /**
-     * Seleziona uno studente per la modifica
-     */
+    // Modifica studente
     public void selectStudente(Studente studente) {
         this.studenteSelezionato = studente;
     }
 
-    // ===== GETTERS AND SETTERS =====
+    // Getters and Setters
 
     public List<Studente> getStudenti() {
         if (studenti == null) {

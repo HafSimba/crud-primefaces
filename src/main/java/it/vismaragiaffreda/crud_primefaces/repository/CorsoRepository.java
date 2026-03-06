@@ -9,13 +9,9 @@ import java.util.Optional;
 @Repository
 public interface CorsoRepository extends JpaRepository<Corso, Long> {
 
-    /**
-     * Cerca un corso per nome
-     */
+    // Cerca un corso per nome (case-sensitive)
     List<Corso> findByNome(String nome);
 
-    /**
-     * Cerca esattamente un corso per nome (assumendo sia unico)
-     */
+
     Optional<Corso> findByNomeIgnoreCase(String nome);
 }

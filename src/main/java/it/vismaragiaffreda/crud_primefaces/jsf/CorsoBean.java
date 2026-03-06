@@ -20,21 +20,16 @@ public class CorsoBean implements Serializable {
     private List<Corso> corsi;
     private Corso corsoSelezionato = new Corso();
 
-    // ===== LOAD DATA =====
+    // Load Data
 
-    /**
-     * Carica la lista di tutti i corsi
-     */
+    // Carica la lista di tutti i corsi
     public void loadCorsi() {
         this.corsi = corsoService.getAllCorsi();
     }
 
-    // ===== CRUD OPERATIONS =====
+    // Crud Operations
 
-    /**
-     * Salva un corso nuovo
-     * @return outcome per JSF navigation
-     */
+    // Salva un corso nuovo o aggiornato
     public String saveCorso() {
         if (corsoSelezionato.getNome() == null || corsoSelezionato.getNome().isEmpty()) {
             return "error_nome_vuoto";
@@ -46,29 +41,23 @@ public class CorsoBean implements Serializable {
         return "success";
     }
 
-    /**
-     * Elimina un corso
-     */
+    // Elimina un corso
     public void deleteCorso(Long id) {
         corsoService.deleteCorso(id);
         loadCorsi();
     }
 
-    /**
-     * Prepara un nuovo corso per l'inserimento
-     */
+
     public void newCorso() {
         this.corsoSelezionato = new Corso();
     }
 
-    /**
-     * Seleziona un corso per la modifica
-     */
+    // Modifica corso
     public void selectCorso(Corso corso) {
         this.corsoSelezionato = corso;
     }
 
-    // ===== GETTERS AND SETTERS =====
+    // Getters and Setters
 
     public List<Corso> getCorsi() {
         if (corsi == null) {
