@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Nuovo Corso</title>
+    <meta charset="UTF-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+    <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP&amp;display=swap" rel="stylesheet"/>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .line-seed-jp-regular {
+            font-family: "LINE Seed JP", sans-serif;
+            font-weight: 800;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-family: "LINE Seed JP", sans-serif;
+        }
+        
+        .header p {
+            font-size: 0.95rem;
+            color: #888;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #32936F;
+            box-shadow: 0 0 0 3px rgba(50, 147, 111, 0.1);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #32936F !important;
+            color: white !important;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: #287557 !important;
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            flex: 1;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="container">
+        <div class="header">
+            <h1>➕ Nuovo Corso</h1>
+            <p>Aggiungi un nuovo elemento al sistema</p>
+        </div>
+        
+        <div class="card">
+            <h:form>
+                <div class="form-group">
+                    <h:outputLabel value="Nome:" for="nome"/>
+                    <p:inputText id="nome" value="#{corsoBean.corsoSelezionato.nome}" styleClass="form-input"/>
+                </div>
+                
+                <div class="form-group">
+                    <h:outputLabel value="Descrizione:" for="desc"/>
+                    <p:inputTextarea id="desc" value="#{corsoBean.corsoSelezionato.descrizione}" rows="4" styleClass="form-input"/>
+                </div>
+                
+                <div class="btn-group">
+                    <p:commandButton value="✓ Salva" action="#{corsoBean.saveCorso()}" update="@form" styleClass="btn btn-primary"/>
+                    <p:button value="← Torna Indietro" outcome="lista" styleClass="btn btn-secondary"/>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

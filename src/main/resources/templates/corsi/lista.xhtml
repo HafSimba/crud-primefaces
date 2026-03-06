@@ -4,84 +4,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
-<ui:composition template="/layout/template.xhtml">
-
-    <ui:define name="title">Lista Corsi</ui:define>
-
-    <ui:define name="content">
-        <h:form>
-            <p:panel header="📚 Elenco Corsi" style="margin-bottom: 20px;">
-                
-                <!-- Pulsante per aggiungere nuovo corso -->
-                <div style="margin-bottom: 15px;">
-                    <p:commandButton value="➕ Nuovo Corso" 
-                                     action="#{ corsoBean.newCorso()}"
-                                     oncomplete="PF('dlg').show()"
-                                     icon="pi pi-plus" />
-                </div>
-
-                <!-- Tabella Corsi -->
-                <p:dataTable var="corso" value="#{ corsoBean.corsi}"
-                             responsiveLayout="scroll"
-                             paginator="true"
-                             rows="10"
-                             emptyMessage="Nessun corso trovato"
-                             currentPageReportTemplate="{currentPage} di {totalPages}">
-
-                    <p:column headerText="ID" sortBy="#{ corso.id}" style="width: 50px">
-                        <h:outputText value="#{ corso.id}"/>
-                    </p:column>
-
-                    <p:column headerText="Nome Corso" sortBy="#{ corso.nome}">
-                        <h:outputText value="#{ corso.nome}"/>
-                    </p:column>
-
-                    <p:column headerText="Descrizione">
-                        <h:outputText value="#{ corso.descrizione}"/>
-                    </p:column>
-
-                    <p:column headerText="Azioni" style="width: 150px">
-                        <p:commandButton icon="pi pi-pencil" 
-                                        action="#{ corsoBean.selectCorso(corso)}"
-                                        oncomplete="PF('dlg').show()"
-                                        title="Modifica"
-                                        styleClass="p-button-rounded p-button-warning p-mr-2" />
-                        <p:commandButton icon="pi pi-trash" 
-                                        action="#{ corsoBean.deleteCorso(corso.id)}"
-                                        title="Elimina"
-                                        styleClass="p-button-rounded p-button-danger"
-                                        onclick="return confirm('Sei sicuro di voler eliminare questo corso?');"/>
-                    </p:column>
-                </p:dataTable>
-
-            </p:panel>
-        </h:form>
-
-        <!-- Dialog per inserimento/modifica -->
-        <h:form enctype="multipart/form-data">
-            <p:dialog header="Corso" widgetVar="dlg" modal="true" showEffect="fade" hideEffect="fade">
-                <h:panelGrid columns="2" cellpadding="5">
-
-                    <h:outputLabel for="nome" value="Nome Corso *"/>
-                    <p:inputText id="nome" value="#{ corsoBean.corsoSelezionato.nome}" required="true"/>
-
-                    <h:outputLabel for="descrizione" value="Descrizione"/>
-                    <p:inputTextarea id="descrizione" value="#{ corsoBean.corsoSelezionato.descrizione}" rows="4" cols="30"/>
-
-                </h:panelGrid>
-
-                <f:facet name="footer">
-                    <p:commandButton value="Salva" action="#{ corsoBean.saveCorso()}"
-                                     update="@form" onclick="PF('dlg').hide()"/>
-                    <p:commandButton value="Annulla" onclick="PF('dlg').hide();" type="button"/>
-                </f:facet>
-            </p:dialog>
-        </h:form>
-
-    </ui:define>
-
-</ui:composition>
+<h:head>
+    <title>Lista Corsi</title>
+</h:head>
+<h:body>
+    <h1>Lista Corsi</h1>
+    
+    <h:form>
+        <p:button value="Nuovo Corso" outcome="inserisci"/>
+        
+        <p:dataTable var="c" value="#{corsoBean.corsi}">
+            <p:column headerText="ID">
+                <h:outputText value="#{c.id}"/>
+            </p:column>
+            <p:column headerText="Nome">
+                <h:outputText value="#{c.nome}"/>
+            </p:column>
+            <p:column headerText="Descrizione">
+                <h:outputText value="#{c.descrizione}"/>
+            </p:column>
+            <p:column headerText="Azioni">
+                <p:commandButton value="Elimina" action="#{corsoBean.deleteCorso(c.id)}" update="@form"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+    
+    <h:form>
+        <p:button value="Home" outcome="index"/>
+    </h:form>
+</h:body>
 </html>

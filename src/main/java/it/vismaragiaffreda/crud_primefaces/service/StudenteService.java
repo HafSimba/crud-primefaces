@@ -23,56 +23,40 @@ public class StudenteService {
     @Autowired
     private CorsoRepository corsoRepository;
 
-    // ===== CRUD OPERATIONS =====
+    // Crud operations
 
-    /**
-     * Ottiene tutti gli studenti
-     */
+
     public List<Studente> getAllStudenti() {
         return studenteRepository.findAll();
     }
 
-    /**
-     * Ottiene uno studente per ID
-     */
+
     public Optional<Studente> getStudenteById(Long id) {
         return studenteRepository.findById(id);
     }
 
-    /**
-     * Salva uno studente nuovo o aggiorna uno esistente
-     */
+
     public Studente saveStudente(Studente studente) {
         return studenteRepository.save(studente);
     }
 
-    /**
-     * Elimina uno studente per ID
-     */
+
     public void deleteStudente(Long id) {
         studenteRepository.deleteById(id);
     }
 
-    /**
-     * Cerca studente per email
-     */
+
     public Optional<Studente> findByEmail(String email) {
         return studenteRepository.findByEmail(email);
     }
 
-    /**
-     * Cerca studente per nome e cognome
-     */
     public Optional<Studente> findByNomeAndCognome(String nome, String cognome) {
         return studenteRepository.findByNomeAndCognome(nome, cognome);
     }
 
-    // ===== BUSINESS LOGIC =====
+    // Business Logic Methods
 
-    /**
-     * Calcola la media voti di uno studente (solo prove superate: voto >= 18)
-     * @return media aritmetica, oppure 0.0 se non ha prove superate
-     */
+
     public Double calcoloMediaStudente(Studente studente) {
         List<Prova> prove = provaRepository.findByStudente(studente);
 
@@ -93,11 +77,7 @@ public class StudenteService {
         return somma / votiSuperati.size();
     }
 
-    /**
-     * Ottiene la lista dei moduli (corsi) ancora da superare per uno studente
-     * (cioè corsi dove ha preso un voto < 18 oppure non ha mai fatto l'esame)
-     * @return Lista di Corso non superati
-     */
+
     public List<Corso> getModuliMancanti(Studente studente) {
         // Ottieni tutti i corsi disponibili
         List<Corso> tuttiCorsi = corsoRepository.findAll();
@@ -117,23 +97,16 @@ public class StudenteService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Conta il numero di corsi superati da uno studente (voto >= 18)
-     */
+
     public long contaCorsiSuperati(Studente studente) {
         return provaRepository.countByStudenteAndVotoGreaterThanEqual(studente, 18);
     }
 
-    /**
-     * Conta il numero di corsi falliti da uno studente (voto < 18)
-     */
+
     public long contaCorsiFalliti(Studente studente) {
         return provaRepository.countByStudenteAndVotoLessThan(studente, 18);
     }
 
-    /**
-     * Ottiene il numero totale di prove sostenute da uno studente
-     */
     public int getTotalProveStudente(Studente studente) {
         return provaRepository.findByStudente(studente).size();
     }

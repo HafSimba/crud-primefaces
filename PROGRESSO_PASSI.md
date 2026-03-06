@@ -10,65 +10,70 @@ Obiettivo: tracciare in modo chiaro cosa e stato inserito/modificato nei file.
 
 ## Storico
 
-### 2026-03-06 - Fase 8 - Creazione Pagine XHTML + PrimeFaces (Frontend)
+### 2026-03-06 - Fase 9 - Refinement UI e Styling Finale
+File modificati:
+- `src/main/resources/META-INF/resources/index.xhtml`
+- `src/main/resources/META-INF/resources/studenti/lista.xhtml`
+- `src/main/resources/META-INF/resources/studenti/inserisci.xhtml`
+- `src/main/resources/META-INF/resources/studenti/stato.xhtml`
+- `src/main/resources/META-INF/resources/corsi/lista.xhtml`
+- `src/main/resources/META-INF/resources/corsi/inserisci.xhtml`
+- `src/main/resources/META-INF/resources/prove/registrazione.xhtml`
+
+Modifiche effettuate:
+
+**Google Font Integration**:
+- Aggiunto link: `https://fonts.googleapis.com/css2?family=LINE+Seed+JP`
+- Applicato font-family "LINE Seed JP" con font-weight 800 (extra bold) a tutti gli h1
+
+**Color Scheme Update**:
+- Card background: da gradienti (#6320EE, #7c3aed, #0891b2) a colore solido **#388697** (teal)
+- Bottoni: da gradienti a colore solido **#32936F** (verde)
+- Bottoni hover: **#287557** (verde scuro)
+- Rimossi tutti i bordi neri (2px solid #1a1a1a) dalle card
+
+**Animation Removal**:
+- Rimossi: `transition: all 0.3s ease` dai selettori .card e .card-large
+- Rimossi: `transform: translateY(-8px)` dagli hover
+- Bottoni rimangono fermi senza effetti di scala
+
+**Button Interaction**:
+- Card container: `cursor: default` (non cliccabili)
+- Solo bottoni freccia: `cursor: pointer` (cliccabili)
+- Aggiunti `!important` ai selettori .btn-primary per sovrascrivere PrimeFaces
+
+**Bug Fixes**:
+- Corretto selettore dataList in studenti/stato.xhtml: `var="mod"` → `var="modulo"` (mod è parola riservata EL)
+- Riparati selettori CSS: `&gt;` → `>` in tutti i file (errore di parsing XHTML entity in CSS)
+
+**CSS Selector Fixes**:
+- `.ui-datatable .ui-datatable-thead > tr > th` (da &gt;)
+- `.ui-datatable .ui-datatable-tbody > tr > td` (da &gt;)
+- `.ui-datatable .ui-datatable-tbody > tr:hover` (da &gt;)
+- `.ui-selectonemenu > .ui-selectonemenu-label` (da &gt;)
+
+Risultato: Dashboard moderna con colori coerenti, font personalizzato, interazione intuitiva (solo freccie cliccabili), senza animazioni, layout stabile.
+
+### 2026-03-06 - Fase 8 - Pagine XHTML Semplici (Frontend Base)
 File creati:
-- Layout master: `src/main/resources/templates/layout/template.xhtml`
-- Homepage: `src/main/resources/templates/index.xhtml`
-- Studenti: `lista.xhtml`, `inserisci.xhtml`, `stato.xhtml`
-- Corsi: `lista.xhtml`, `inserisci.xhtml`
-- Prove: `registrazione.xhtml`
-- CSS: `src/main/resources/static/css/style.css`
+- `src/main/resources/templates/index.xhtml` - Homepage
+- `src/main/resources/templates/studenti/lista.xhtml` - Lista studenti
+- `src/main/resources/templates/studenti/inserisci.xhtml` - Form nuovo studente
+- `src/main/resources/templates/studenti/stato.xhtml` - Stato studenti
+- `src/main/resources/templates/corsi/lista.xhtml` - Lista corsi
+- `src/main/resources/templates/corsi/inserisci.xhtml` - Form nuovo corso
+- `src/main/resources/templates/prove/registrazione.xhtml` - Registrazione prove
 
-Inserimenti effettuati:
+Correzioni pom.xml:
+- Aggiornato JoinFaces da 5.2.0 a 6.0.3 (compatibile con Spring Boot 4.0.3)
+- Rimosso spring-boot-h2console (inesistente)
+- Aggiunto spring-boot-starter-web
+- Stabilizzato spring-boot-starter-test
 
-**Layout Master**:
-- Struttura di base HTML5 + JSF
-- Header con titolo e sottotitolo
-- Navbar con PrimeFaces menubar (navigazione principale)
-- Sezione content (ui:insert per le pagine figlie)
-- Footer
-- Default ui:composition per tutte le pagine
-
-**Index.xhtml (Homepage)**:
-- Pagina di benvenuto
-- Descrizione funzionalità principali
-- Criteri di valutazione (voto >= 18 per superamento)
-- Pulsanti di navigazione rapida
-
-**Pagine Studenti**:
-- **lista.xhtml**: DataTable con tutti gli studenti, CRUD inline (modifica/elimina con dialog)
-- **inserisci.xhtml**: Form per inserimento nuovo studente (nome, cognome, email)
-- **stato.xhtml**: Tabella espandibile con dettagli ogni studente:
-  - Media voti (prove superate)
-  - Moduli mancanti (corsi non superati)
-  - Statistiche (superati, falliti, total prove)
-
-**Pagine Corsi**:
-- **lista.xhtml**: DataTable con tutti i corsi, CRUD inline
-- **inserisci.xhtml**: Form per inserimento nuovo corso (nome, descrizione)
-
-**Pagine Prove**:
-- **registrazione.xhtml**: Form registrazione prova con:
-  - SelectOneMenu per studente (dropdown)
-  - SelectOneMenu per corso (dropdown)
-  - SpinnerNumber per voto (1-30)
-  - Validazioni lato client
-  - Badge colore per stato (SUPERATO/FALLITO)
-  - Tabella prove registrate
-
-**CSS**:
-- Tema moderno con gradiente viola (#667eea, #764ba2)
-- Responsive design (mobile-friendly)
-- Stili per datatable, buttons, forms, messages, badges, dialog
-- Transitions e hover effects
-
-Note:
-- Tutti gli XHTML usano JSF + PrimeFaces
-- Integrati i Managed Bean (StudenteBean, CorsoBean, ProvaBean, StatiStudentiBean)
-- Validazione lato server mantenuta nei bean
-- Pagine responsive per mobile/tablet
-- Colori e icone accattivanti (emoji + PrimeFaces icons)
-- Tutti i requisiti del task implementati e visibili nel frontend
+Pagine create: SEMPLICI E FUNZIONALI (senza CSS elaborato)
+- Input/output di base con JSF + PrimeFaces
+- Integrazione completa con ManageBean
+- Pronte per personalizzazione estetica
 
 ### 2026-03-06 - Fase 7 - Creazione Managed Bean JSF (Controller Layer)
 File creati:

@@ -4,119 +4,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
-<ui:composition template="/layout/template.xhtml">
-
-    <ui:define name="title">Stato Studenti</ui:define>
-
-    <ui:define name="content">
-        <h:form>
-            
-            <!-- Intro -->
-            <p:panel header="📊 Stato Studenti - Analisi Completa" style="margin-bottom: 20px;">
-                <p:outputPanel>
-                    <p>Visualizza di seguito per ogni studente:</p>
-                    <ul>
-                        <li><strong>Media Voti:</strong> Media delle prove superate (voto ≥ 18)</li>
-                        <li><strong>Moduli Mancanti:</strong> Corsi ancora da superare</li>
-                        <li><strong>Statistiche:</strong> Numero di corsi superati/falliti e totale prove</li>
-                    </ul>
-                </p:outputPanel>
-            </p:panel>
-
-            <!-- Accordion con dettaglio per ogni studente -->
-            <p:panel header="👥 Dettaglio per Studente" style="margin-bottom: 20px;">
-                
-                <p:dataTable var="stato" value="#{ studiStudentiBean.statiStudenti}"
-                             responsiveLayout="scroll"
-                             paginator="true"
-                             rows="5"
-                             expandableRows="true"
-                             emptyMessage="Nessuno studente registrato">
-
-                    <!-- Colonna espandibile -->
-                    <p:column expander="true" style="width: 50px"/>
-
-                    <!-- Nome Studente -->
-                    <p:column headerText="Studente" sortBy="#{ stato.studente.cognome}">
-                        <h:outputText value="#{ stato.studente.nome} #{ stato.studente.cognome}"/>
-                    </p:column>
-
-                    <!-- Media Voti -->
-                    <p:column headerText="Media Voti" style="width: 120px">
-                        <h:outputText value="#{ stato.mediaVotiFormatted}" style="font-weight: bold; font-size: 1.1em"/>
-                    </p:column>
-
-                    <!-- Statistiche -->
-                    <p:column headerText="Statistiche" style="width: 200px">
-                        <h:outputText value="Superati: #{ stato.corsiSuperati} | Falliti: #{ stato.corsiFalliti} | Tot: #{ stato.totalProve}"/>
-                    </p:column>
-
-                    <!-- Row Expansion Detail -->
-                    <p:rowExpansion>
-                        <p:panel header="Dettagli di #{stato.studente.nome} #{stato.studente.cognome}">
-
-                            <h:panelGrid columns="1" style="width: 100%">
-
-                                <!-- Email -->
-                                <h:panelGroup>
-                                    <strong>📧 Email:</strong> 
-                                    <h:outputText value="#{ stato.studente.email}" rendered="#{ stato.studente.email ne null}"/>
-                                    <h:outputText value="Non specificata" style="color: gray" rendered="#{ stato.studente.email eq null}"/>
-                                </h:panelGroup>
-
-                                <!-- Media Voti -->
-                                <h:panelGroup>
-                                    <strong>📈 Media Voti:</strong>
-                                    <h:outputText value="#{ stato.mediaVotiFormatted}" style="color: #4CAF50; font-weight: bold; font-size: 1.15em"/>
-                                </h:panelGroup>
-
-                                <!-- Statistiche -->
-                                <h:panelGroup>
-                                    <strong>📊 Statistiche Prove:</strong><br/>
-                                    ✅ Superati: <h:outputText value="#{ stato.corsiSuperati}" style="color: green; font-weight: bold"/><br/>
-                                    ❌ Falliti: <h:outputText value="#{ stato.corsiFalliti}" style="color: red; font-weight: bold"/><br/>
-                                    📝 Totale: <h:outputText value="#{ stato.totalProve}" style="font-weight: bold"/>
-                                </h:panelGroup>
-
-                                <!-- Moduli Mancanti -->
-                                <h:panelGroup rendered="#{ stato.moduliMancanti.size() gt 0}">
-                                    <strong>📚 Moduli ancora da superare:</strong><br/>
-                                    <ui:repeat var="moduloMancante" value="#{ stato.moduliMancanti}">
-                                        <p:outputPanel>
-                                            • <h:outputText value="#{ moduloMancante.nome}"/><br/>
-                                        </p:outputPanel>
-                                    </ui:repeat>
-                                </h:panelGroup>
-
-                                <h:panelGroup rendered="#{ stato.moduliMancanti.size() eq 0}">
-                                    <p:outputPanel styleClass="ui-message ui-message-success">
-                                        ✓ <strong>Complimenti!</strong> Hai superato tutti i moduli!
-                                    </p:outputPanel>
-                                </h:panelGroup>
-
-                            </h:panelGrid>
-                        </p:panel>
-                    </p:rowExpansion>
-
-                </p:dataTable>
-
-            </p:panel>
-
-            <!-- Riepilogo Generale -->
-            <p:panel header="📊 Statistiche Generali">
-                <h:panelGrid columns="1" style="width: 100%">
-                    <p:outputPanel>
-                        <strong>Numero totale studenti:</strong> 
-                        <h:outputText value="#{ studiStudentiBean.studenti.size()}"/>
-                    </p:outputPanel>
-                </h:panelGrid>
-            </p:panel>
-
-        </h:form>
-    </ui:define>
-
-</ui:composition>
+<h:head>
+    <title>Stato Studenti</title>
+</h:head>
+<h:body>
+    <h1>Stato Studenti</h1>
+    
+    <h:form>
+        <p:dataTable var="stato" value="#{statiStudentiBean.statiStudenti}">
+            <p:column headerText="Studente">
+                <h:outputText value="#{stato.studente.nome} #{stato.studente.cognome}"/>
+            </p:column>
+            <p:column headerText="Media Voti">
+                <h:outputText value="#{stato.mediaVotiFormatted}"/>
+            </p:column>
+            <p:column headerText="Superati">
+                <h:outputText value="#{stato.corsiSuperati}"/>
+            </p:column>
+            <p:column headerText="Falliti">
+                <h:outputText value="#{stato.corsiFalliti}"/>
+            </p:column>
+            <p:column headerText="Moduli Mancanti">
+                <p:dataList value="#{stato.moduliMancanti}" var="mod">
+                    <h:outputText value="#{mod.nome}"/>
+                </p:dataList>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+    
+    <h:form>
+        <p:button value="Home" outcome="index"/>
+    </h:form>
+</h:body>
 </html>

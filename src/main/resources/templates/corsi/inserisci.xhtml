@@ -4,47 +4,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
-<ui:composition template="/layout/template.xhtml">
-
-    <ui:define name="title">Inserisci Corso</ui:define>
-
-    <ui:define name="content">
-        <h:form>
-            <p:panel header="➕ Nuovo Corso" style="margin-bottom: 20px;">
-                
-                <h:panelGrid columns="3" cellpadding="5" style="margin-bottom: 20px">
-
-                    <h:outputLabel for="nome" value="Nome Corso *"/>
-                    <p:inputText id="nome" value="#{ corsoBean.corsoSelezionato.nome}" 
-                                 required="true" placeholder="Es: Matematica, Informatica, ecc."/>
-                    <p:message for="nome"/>
-
-                    <h:outputLabel for="descrizione" value="Descrizione"/>
-                    <p:inputTextarea id="descrizione" value="#{ corsoBean.corsoSelezionato.descrizione}"
-                                     rows="4" cols="50" placeholder="Descrizione del corso (opzionale)"/>
-                    <p:message for="descrizione"/>
-
-                </h:panelGrid>
-
-                <p:commandButton value="💾 Salva Corso" 
-                                 action="#{ corsoBean.saveCorso()}"
-                                 update="@form"
-                                 icon="pi pi-save"
-                                 styleClass="p-button-success"/>
-                
-                <p:spacer width="10" height="0"/>
-                
-                <p:button value="↩️ Torna alla Lista" 
-                         outcome="lista"
-                         icon="pi pi-arrow-left"
-                         styleClass="p-button-secondary"/>
-
-            </p:panel>
-        </h:form>
-    </ui:define>
-
-</ui:composition>
+<h:head>
+    <title>Nuovo Corso</title>
+</h:head>
+<h:body>
+    <h1>Inserisci Nuovo Corso</h1>
+    
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Nome:"/>
+            <p:inputText value="#{corsoBean.corsoSelezionato.nome}"/>
+            
+            <h:outputLabel value="Descrizione:"/>
+            <p:inputTextarea value="#{corsoBean.corsoSelezionato.descrizione}"/>
+        </h:panelGrid>
+        
+        <p:commandButton value="Salva" action="#{corsoBean.saveCorso()}" update="@form"/>
+        <p:button value="Torna Indietro" outcome="lista"/>
+    </h:form>
+</h:body>
 </html>
