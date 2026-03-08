@@ -1,297 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>HOME - Gestione Esami</title>
-    <meta charset="UTF-8"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
-    <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP&amp;display=swap" rel="stylesheet"/>
-    <style type="text/css">
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        .line-seed-jp-regular {
-            font-family: "LINE Seed JP", sans-serif;
-            font-weight: 800;
-            font-style: normal;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            margin-bottom: 50px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-            font-weight: 700;
-            font-family: "LINE Seed JP", sans-serif;
-        }
-        
-        .header h2 {
-            font-size: 1.1rem;
-            color: #888;
-            font-weight: 400;
-            margin-bottom: 5px;
-        }
-        
-        .header p {
-            font-size: 1rem;
-            color: #888;
-            font-weight: 400;
-        }
-        
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .card {
-            background: #388697;
-            border-radius: 24px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            cursor: default;
-            text-decoration: none;
-            color: white;
-        }
-        
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-        
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-            font-family: "LINE Seed JP", sans-serif;
-        }
-        
-        .card-subtitle {
-            font-size: 0.85rem;
-            opacity: 0.85;
-            font-weight: 400;
-            margin-bottom: 16px;
-        }
-        
-        .card-button-form {
-            margin-top: auto;
-        }
-        
-        .card-btn, .card-btn .ui-button {
-            padding: 8px 12px !important;
-            font-size: 0.9rem !important;
-            border-radius: 6px !important;
-            background: #32936F !important;
-            color: white !important;
-            border: none !important;
-            cursor: pointer;
-        }
-        
-        .card-btn:hover, .card-btn .ui-button:hover {
-            background: #287557 !important;
-        }
-        
-        .card-btn .ui-button-text {
-            display: none;
-        }
-        
-        .section {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        
-        .card-large {
-            background: #388697;
-            border-radius: 24px;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            cursor: default;
-            text-decoration: none;
-            color: white;
-            min-height: 180px;
-        }
-        
-        .card-large button, .card-large .ui-button {
-            padding: 8px 16px !important;
-            font-size: 0.85rem !important;
-            border-radius: 8px !important;
-            background: #32936F !important;
-            color: white !important;
-            border: none !important;
-            cursor: pointer;
-            margin-top: 20px;
-            white-space: pre-line !important;
-            line-height: 1.4;
-        }
-        
-        .card-large button:hover, .card-large .ui-button:hover {
-            background: #287557 !important;
-        }
-        
-        .card-large button::after, .card-large .ui-button::after {
-            content: " →";
-            margin-left: 4px;
-        }
-        
-        .card-large .ui-button-text {
-            white-space: pre-line !important;
-            line-height: 1.4;
-        }
-        
-        .card-large .card-button-form {
-            margin-top: auto;
-        }
-        
-        .card-large .card-btn, .card-large .card-btn .ui-button {
-            padding: 10px 14px !important;
-            font-size: 1rem !important;
-            border-radius: 6px !important;
-            background: #32936F !important;
-            color: white !important;
-            border: none !important;
-            cursor: pointer;
-        }
-        
-        .card-large .card-btn:hover, .card-large .card-btn .ui-button:hover {
-            background: #287557 !important;
-        }
-        
-        .card-large .card-btn .ui-button-text {
-            display: none;
-        }
-        
-        .card-large-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-            font-family: "LINE Seed JP", sans-serif;
-        }
-        
-        .card-large-subtitle {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            font-weight: 400;
-        }
-        
-        @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                margin-bottom: 30px;
-            }
-            
-            .section {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
     <div class="container">
-        <div class="header">
+        <div class="header-home">
             <h1>Ciao!</h1>
             <h2>Questa è la piattaform dove puoi gestire gli esami dei tuoi studenti e i loro corsi.</h2>
         </div>
-        
+
         <div class="dashboard">
-            <div class="card blue">
-                <div class="card-icon">👥</div>
-                <div class="card-title">Lista Studenti</div>
-                <div class="card-subtitle">Visualizza tutti</div>
-                <h:form styleClass="card-button-form">
-                    <p:button outcome="studenti/lista" icon="pi pi-arrow-right" styleClass="card-btn" />
+            <div class="card-dash">
+                <div class="card-dash-icon">👥</div>
+                <div class="card-dash-title">Lista Studenti</div>
+                <div class="card-dash-subtitle">Visualizza tutti</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="studenti/lista" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
                 </h:form>
             </div>
-            
-            <div class="card purple">
-                <div class="card-icon">➕</div>
-                <div class="card-title">Nuovo Studente</div>
-                <div class="card-subtitle">Aggiungi uno</div>
-                <h:form styleClass="card-button-form">
-                    <p:button outcome="studenti/inserisci" icon="pi pi-arrow-right" styleClass="card-btn" />
+
+            <div class="card-dash">
+                <div class="card-dash-icon">➕</div>
+                <div class="card-dash-title">Nuovo Studente</div>
+                <div class="card-dash-subtitle">Aggiungi uno</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="studenti/inserisci" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
                 </h:form>
             </div>
-            
-            <div class="card indigo">
-                <div class="card-icon">📚</div>
-                <div class="card-title">Lista Corsi</div>
-                <div class="card-subtitle">Visualizza tutti</div>
-                <h:form styleClass="card-button-form">
-                    <p:button outcome="corsi/lista" icon="pi pi-arrow-right" styleClass="card-btn" />
+
+            <div class="card-dash">
+                <div class="card-dash-icon">📚</div>
+                <div class="card-dash-title">Lista Corsi</div>
+                <div class="card-dash-subtitle">Visualizza tutti</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="corsi/lista" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
                 </h:form>
             </div>
-            
-            <div class="card violet">
-                <div class="card-icon">➕</div>
-                <div class="card-title">Nuovo Corso</div>
-                <div class="card-subtitle">Aggiungi uno</div>
-                <h:form styleClass="card-button-form">
-                    <p:button outcome="corsi/inserisci" icon="pi pi-arrow-right" styleClass="card-btn" />
+
+            <div class="card-dash">
+                <div class="card-dash-icon">➕</div>
+                <div class="card-dash-title">Nuovo Corso</div>
+                <div class="card-dash-subtitle">Aggiungi uno</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="corsi/inserisci" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
                 </h:form>
             </div>
         </div>
-        
-        <div class="section">
-            <div class="card-large blue">
+
+        <div class="section-row">
+            <div class="card-large">
                 <div class="card-large-title">Stato Studenti</div>
                 <div class="card-large-subtitle">Medie, moduli mancanti e statistiche</div>
-                <h:form styleClass="card-button-form">
-                    <p:button outcome="studenti/stato" icon="pi pi-arrow-right" styleClass="card-btn" />
+                <h:form styleClass="card-large-btn-form">
+                    <p:button outcome="studenti/stato" icon="pi pi-arrow-right" styleClass="card-large-btn" />
                 </h:form>
             </div>
-            
-            <div class="card-large teal">
+
+            <div class="card-large">
                 <div class="card-large-title">Registra Prova</div>
                 <div class="card-large-subtitle">Registra un nuovo esame</div>
-                <h:form styleClass="card-button-form">
-                    <p:button outcome="prove/registrazione" icon="pi pi-arrow-right" styleClass="card-btn" />
+                <h:form styleClass="card-large-btn-form">
+                    <p:button outcome="prove/registrazione" icon="pi pi-arrow-right" styleClass="card-large-btn" />
                 </h:form>
             </div>
         </div>
     </div>
 </h:body>
+
 </html>

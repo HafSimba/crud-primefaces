@@ -10,6 +10,38 @@ Obiettivo: tracciare in modo chiaro cosa e stato inserito/modificato nei file.
 
 ## Storico
 
+### 2026-03-08 - Refactoring CSS: estrazione in foglio di stile condiviso
+File creati:
+- `src/main/resources/META-INF/resources/css/style.css`
+
+File modificati:
+- `src/main/resources/META-INF/resources/index.xhtml`
+- `src/main/resources/META-INF/resources/studenti/lista.xhtml`
+- `src/main/resources/META-INF/resources/studenti/inserisci.xhtml`
+- `src/main/resources/META-INF/resources/studenti/stato.xhtml`
+- `src/main/resources/META-INF/resources/corsi/lista.xhtml`
+- `src/main/resources/META-INF/resources/corsi/inserisci.xhtml`
+- `src/main/resources/META-INF/resources/prove/registrazione.xhtml`
+
+Modifiche effettuate:
+- Rimossi tutti i blocchi `<style>` inline da ogni file XHTML (~1031 righe totali, ~100-220 per file).
+- Rimossi i link Google Fonts inline da ogni file (`<link rel="preconnect">` + `<link href="fonts.googleapis.com">`).
+- Creato foglio di stile condiviso `css/style.css` (~280 righe) con:
+  - `@import` Google Font "LINE Seed JP"
+  - Reset CSS, stili body/layout
+  - Classi riutilizzabili: `.container`, `.container-narrow`, `.header`, `.header-center`, `.header-home`
+  - Componenti: `.card`, `.card-form`, `.btn`, `.btn-primary`, `.btn-secondary`, `.btn-danger`
+  - Gruppi bottoni: `.btn-group`, `.btn-group-centered`
+  - Dashboard home: `.card-dash`, `.card-large`, `.section-row`, relativi modificatori
+  - Override PrimeFaces: `.ui-datatable`, `.ui-selectonemenu`
+  - Media queries responsive per mobile
+- In ogni file XHTML sostituito il blocco `<h:head>` con unica riga:
+  `<h:outputStylesheet library="css" name="style.css"/>` (metodo corretto JSF per risorse statiche da `META-INF/resources`).
+- In `index.xhtml`: rinominate classi `.card`→`.card-dash`, `.card-btn`→`.card-dash-btn`, `.section`→`.section-row` per evitare conflitti con la classe `.card` generica delle pagine interne.
+- In `studenti/inserisci.xhtml` e `corsi/inserisci.xhtml`: usate classi specifiche `container-narrow`, `header-center`, `card-form`, `btn-group-centered` per layout a colonna stretta con bottoni centrati.
+
+Risultato: CSS non più duplicato tra le pagine. Manutenzione centralizzata: ogni modifica estetica va fatta in un solo file.
+
 ### 2026-03-06 - Hotfix Avvio Runtime (Porta e Mapping JSF)
 File modificati:
 - `src/main/resources/application.properties`
