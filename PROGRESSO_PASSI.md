@@ -10,6 +10,36 @@ Obiettivo: tracciare in modo chiaro cosa e stato inserito/modificato nei file.
 
 ## Storico
 
+### 2026-03-21 - Allineamento MySQL-only + Verifica runtime su `esamedb`
+File modificati:
+- `pom.xml`
+- `src/main/resources/application.properties`
+
+Modifiche effettuate:
+- Rimossa dipendenza runtime H2 (`com.h2database:h2`) e sostituita con driver MySQL (`com.mysql:mysql-connector-j`) in `pom.xml`.
+- Eliminata configurazione H2 da `application.properties`.
+- Impostata configurazione datasource MySQL con variabili ambiente:
+  - `spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3306/esamedb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}`
+  - `spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver`
+  - `spring.datasource.username=${DB_USER:root}`
+  - `spring.datasource.password=${DB_PASSWORD:root}`
+  - `spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect`
+- Rimossa proprietà `spring.h2.console.enabled` (non coerente con setup MySQL-only).
+
+Verifiche eseguite:
+- Build Maven OK: `./mvnw.cmd -DskipTests package` (`BUILD SUCCESS`).
+- Dependency check OK:
+  - presente `com.mysql:mysql-connector-j`
+  - assente `com.h2database:h2`
+- Verifica runtime con DB MySQL `esamedb` e credenziali locali fornite via variabili ambiente.
+- Log applicativo conferma startup completo:
+  - `HikariPool-1 - Start completed`
+  - `Started CrudPrimefacesApplication`
+- Endpoint applicativo verificato: `http://localhost:8080/index.xhtml` con status `200`.
+
+Risultato:
+- Progetto allineato a uso esclusivo MySQL, con avvio e risposta HTTP confermati su database `esamedb`.
+
 ### 2026-03-08 - Refactoring CSS: estrazione in foglio di stile condiviso
 File creati:
 - `src/main/resources/META-INF/resources/css/style.css`
