@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Lista Corsi</title>
+    <meta charset="UTF-8" />
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Lista Corsi</h1>
+            <p>Visualizza, modifica e gestisci tutti i corsi</p>
+        </div>
+
+        <div class="card">
+            <div class="btn-group">
+                <h:form>
+                    <p:button value="+ Nuovo Corso" outcome="inserisci" styleClass="btn btn-primary" />
+                </h:form>
+            </div>
+
+            <h:form id="tableForm">
+                <p:dataTable var="c" value="#{corsoBean.corsi}" styleClass="ui-datatable" rows="10" paginator="true">
+                    <p:column headerText="ID" style="width: 10%">
+                        <h:outputText value="#{c.id}" />
+                    </p:column>
+                    <p:column headerText="Nome" style="width: 25%">
+                        <h:outputText value="#{c.nome}" />
+                    </p:column>
+                    <p:column headerText="Descrizione" style="width: 55%">
+                        <h:outputText value="#{c.descrizione}" />
+                    </p:column>
+                    <p:column headerText="Azioni" style="width: 10%; text-align: center">
+                        <p:commandButton value="Elimina" action="#{corsoBean.deleteCorso(c.id)}" update="tableForm"
+                            styleClass="btn btn-danger" style="width: 100%" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+
+        <div class="footer">
+            <h:form>
+                <p:button value="← Torna alla Home" outcome="/index" styleClass="btn btn-secondary" />
+            </h:form>
+        </div>
+    </div>
+</h:body>
+
+</html>

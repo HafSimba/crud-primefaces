@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>HOME - Gestione Esami</title>
+    <meta charset="UTF-8" />
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <div class="container">
+        <div class="header-home">
+            <h1>Ciao!</h1>
+            <h2>Questa è la piattaform dove puoi gestire gli esami dei tuoi studenti e i loro corsi.</h2>
+        </div>
+
+        <div class="dashboard">
+            <div class="card-dash">
+                <div class="card-dash-icon">👥</div>
+                <div class="card-dash-title">Lista Studenti</div>
+                <div class="card-dash-subtitle">Visualizza tutti</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="studenti/lista" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
+                </h:form>
+            </div>
+
+            <div class="card-dash">
+                <div class="card-dash-icon">➕</div>
+                <div class="card-dash-title">Nuovo Studente</div>
+                <div class="card-dash-subtitle">Aggiungi uno</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="studenti/inserisci" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
+                </h:form>
+            </div>
+
+            <div class="card-dash">
+                <div class="card-dash-icon">📚</div>
+                <div class="card-dash-title">Lista Corsi</div>
+                <div class="card-dash-subtitle">Visualizza tutti</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="corsi/lista" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
+                </h:form>
+            </div>
+
+            <div class="card-dash">
+                <div class="card-dash-icon">➕</div>
+                <div class="card-dash-title">Nuovo Corso</div>
+                <div class="card-dash-subtitle">Aggiungi uno</div>
+                <h:form styleClass="card-dash-btn-form">
+                    <p:button outcome="corsi/inserisci" icon="pi pi-arrow-right" styleClass="card-dash-btn" />
+                </h:form>
+            </div>
+        </div>
+
+        <div class="section-row">
+            <div class="card-large">
+                <div class="card-large-title">Stato Studenti</div>
+                <div class="card-large-subtitle">Medie, moduli mancanti e statistiche</div>
+                <h:form styleClass="card-large-btn-form">
+                    <p:button outcome="studenti/stato" icon="pi pi-arrow-right" styleClass="card-large-btn" />
+                </h:form>
+            </div>
+
+            <div class="card-large">
+                <div class="card-large-title">Registra Prova</div>
+                <div class="card-large-subtitle">Registra un nuovo esame</div>
+                <h:form styleClass="card-large-btn-form">
+                    <p:button outcome="prove/registrazione" icon="pi pi-arrow-right" styleClass="card-large-btn" />
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+
+</html>

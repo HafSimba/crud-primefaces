@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Stato Studenti</title>
+    <meta charset="UTF-8" />
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <div class="container">
+        <div class="header">
+            <h1>📈 Stato Studenti</h1>
+            <p>Visualizza medie, moduli mancanti e statistiche di tutti gli studenti</p>
+        </div>
+
+        <div class="card">
+            <h:form>
+                <p:dataTable var="stato" value="#{statiStudentiBean.statiStudenti}" styleClass="ui-datatable" rows="10"
+                    paginator="true">
+                    <p:column headerText="Studente" style="width: 20%">
+                        <h:outputText value="#{stato.studente.nome} #{stato.studente.cognome}" />
+                    </p:column>
+                    <p:column headerText="Media Voti" style="width: 15%">
+                        <h:outputText value="#{stato.mediaVotiFormatted}" />
+                    </p:column>
+                    <p:column headerText="Superati" style="width: 12%">
+                        <h:outputText value="#{stato.corsiSuperati}" />
+                    </p:column>
+                    <p:column headerText="Falliti" style="width: 12%">
+                        <h:outputText value="#{stato.corsiFalliti}" />
+                    </p:column>
+                    <p:column headerText="Moduli Mancanti" style="width: 41%">
+                        <p:dataList value="#{stato.moduliMancanti}" var="modulo" type="unordered">
+                            <h:outputText value="#{modulo.nome}" />
+                        </p:dataList>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+
+        <div class="footer">
+            <h:form>
+                <p:button value="← Torna alla Home" outcome="/index" styleClass="btn btn-secondary" />
+            </h:form>
+        </div>
+    </div>
+</h:body>
+
+</html>
